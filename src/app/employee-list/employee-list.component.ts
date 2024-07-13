@@ -10,7 +10,9 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
 })
 export class EmployeeListComponent implements OnInit {
   employees: any[] = [];
+  filteredEmployees: any[] = [];
   displayedColumns: string[] = ['firstName', 'lastName', 'email', 'position', 'actions'];
+  searchTerm: string = '';
 
   constructor(
     private employeeService: EmployeeService,
@@ -25,11 +27,20 @@ export class EmployeeListComponent implements OnInit {
     this.employeeService.getEmployees().subscribe(
       (data) => {
         this.employees = data;
+        this.filteredEmployees = data; // Initialize filteredEmployees with all employees
       },
-      (error) => {
-        console.error('Error fetching employees', error);
-      }
+      (error) => { console.error('Error fetching employees', error); }
     );
+  }
+
+  // Search Filtering Logic
+  filterEmployees(): void {
+    this.filteredEmployees = this.employees.filter(employee => {
+      return employee.firstName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+             employee.lastName.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+             employee.email.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+             employee.position.toLowerCase().includes(this.searchTerm.toLowerCase());
+    });
   }
 
   deleteEmployee(id: string): void {

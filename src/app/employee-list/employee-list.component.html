@@ -1,7 +1,11 @@
 <mat-card>
   <mat-card-title align="center">Employee List</mat-card-title>
   <mat-card-content>
-    <table mat-table [dataSource]="employees" class="mat-elevation-z8">
+    <mat-form-field appearance="outline">
+      <mat-label>Search Employees</mat-label>
+      <input matInput placeholder="Type to search..." [(ngModel)]="searchTerm" (keyup)="filterEmployees()">
+    </mat-form-field>
+    <table mat-table [dataSource]="filteredEmployees" class="mat-elevation-z8">
       <ng-container matColumnDef="firstName">
         <th mat-header-cell *matHeaderCellDef> First Name </th>
         <td mat-cell *matCellDef="let employee"> {{employee.firstName}} </td>
