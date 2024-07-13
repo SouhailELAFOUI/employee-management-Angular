@@ -1,0 +1,41 @@
+<mat-card>
+  <mat-card-title align="center">{{ isEditMode ? 'Edit Employee' : 'Add New Employee' }}</mat-card-title>
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label>First Name</mat-label>
+        <input matInput type="text" name="firstName" [(ngModel)]="employee.firstName" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput type="text" name="lastName" [(ngModel)]="employee.lastName" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" name="email" [(ngModel)]="employee.email" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Phone Number</mat-label>
+        <input matInput type="tel" name="phoneNumber" [(ngModel)]="employee.phoneNumber">
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Position</mat-label>
+        <input matInput type="text" name="position" [(ngModel)]="employee.position" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Department</mat-label>
+        <input matInput type="text" name="department" [(ngModel)]="employee.department" required>
+      </mat-form-field>
+
+      <div class="button-row">
+        <button mat-raised-button color="primary" type="submit">{{ isEditMode ? 'Update' : 'Create' }}</button>
+        <button mat-button type="button" routerLink="/employees">Cancel</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
